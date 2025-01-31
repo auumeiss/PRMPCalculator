@@ -18,18 +18,26 @@ class MainActivity : AppCompatActivity() {
     private var currentnumber = ""
     private var currentoperator = ""
 
-    val calcResult: TextView = findViewById(R.id.calcresult)
-    val inputForm: TextView = findViewById(R.id.inputform)
-
     private var result = ""
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        supportActionBar?.hide()
         setContentView(R.layout.activity_main)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
-        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
+
+        val calcResult: TextView = findViewById(R.id.calcresult)
+        val inputForm: TextView = findViewById(R.id.inputform)
 
         val parentLayout: ViewGroup = findViewById(R.id.layoutmain)
 
@@ -37,91 +45,86 @@ class MainActivity : AppCompatActivity() {
             val view = parentLayout.getChildAt(i)
             if (view is Button) {
                 view.setOnClickListener {
-                    val buttonText=view.text.toString()
-                    when{
-                        buttonText.matches(Regex("[0-9]"))->{
-                            if (currentoperator.isEmpty())
-                            {
-                                firstnumber+=buttonText
-                                calcResult.text=firstnumber
-                            }else
-                            {
-                                currentnumber+=buttonText
-                                calcResult.text=currentnumber
+                    val buttonText = view.text.toString()
+                    when {
+                        buttonText.matches(Regex("[0-9]")) -> {
+                            if (currentoperator.isEmpty()) {
+                                firstnumber += buttonText
+                                calcResult.text = firstnumber
+                            } else {
+                                currentnumber += buttonText
+                                calcResult.text = currentnumber
                             }
                         }
 
-                        buttonText.matches(Regex("[+\\-*/]"))->{
-                            currentnumber=""
-                            if (calcResult.text.toString().isNotEmpty())
-                            {
-                                currentoperator=buttonText
-                                calcResult.text="0"
+                        buttonText.matches(Regex("[+\\-*/]")) -> {
+                            currentnumber = ""
+                            if (calcResult.text.toString().isNotEmpty()) {
+                                currentoperator = buttonText
+                                calcResult.text = "0"
                             }
                         }
-                        buttonText == "=" ->{
-                            if (currentnumber.isNotEmpty()&& currentoperator.isNotEmpty())
-                            {
+
+                        buttonText == "=" -> {
+                            if (currentnumber.isNotEmpty() && currentoperator.isNotEmpty()) {
                                 inputForm.text = "$firstnumber$currentoperator$currentnumber"
                                 result = evaluateExpr(firstnumber, currentnumber, currentoperator)
-                                firstnumber=result
-                                calcResult.text=result
+                                firstnumber = result
+                                calcResult.text = result
                             }
                         }
 
                         buttonText == "." -> {
-                            if (currentoperator.isEmpty())
-                            {
-                                if (firstnumber.contains("."))
-                                {
-                                    if (firstnumber.isEmpty())firstnumber+="0$buttonText"
-                                    else firstnumber +=buttonText
-                                    calcResult.text=firstnumber
+                            if (currentoperator.isEmpty()) {
+                                if (!firstnumber.contains(".")) {
+                                    firstnumber += if (firstnumber.isEmpty()) "0." else "."
+                                    calcResult.text = firstnumber
                                 }
-                            }
-                            else
-                            {
-                                if (currentnumber.contains("."))
-                                {
-                                    if(currentnumber.isEmpty()) currentnumber+="0$buttonText"
-                                    else currentnumber += buttonText
+                            } else {
+                                if (!currentnumber.contains(".")) {
+                                    currentnumber += if (currentnumber.isEmpty()) "0." else "."
                                     calcResult.text = currentnumber
                                 }
                             }
                         }
-                        buttonText=="C"->{
-                            currentnumber=""
-                            firstnumber=""
-                            currentoperator=""
-                            calcResult.text=""
-                            inputForm.text=""
+
+                        buttonText == "C" -> {
+                            currentnumber = ""
+                            firstnumber = ""
+                            currentoperator = ""
+                            calcResult.text = "0"
+                            inputForm.text = ""
                         }
                     }
                 }
             }
         }
-
-
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
     }
 
-    private fun evaluateExpr (firstNumber:String, secondNumber:String, operator:String):String
-    {
-        val num1=firstNumber.toDouble()
-        val num2=secondNumber.toDouble()
-        return when(operator)
-        {
-            "+"->(num1+num2).toString()
-            "-"->(num1-num2).toString()
-            "*"->(num1*num2).toString()
-            "/"->(num1/num2).toString()
-            else ->""
+    private fun evaluateExpr(
+        firstNumber: String,
+        secondNumber: String,
+        operator: String
+    ): String {
+        val num1 = firstNumber.toDouble()
+        val num2 = secondNumber.toDouble()
+        val result = when (operator) {
+            "+" -> num1 + num2
+            "-" -> num1 - num2
+            "*" -> num1 * num2
+            "/" -> num1 / num2
+            else -> 0.0
         }
+        // Округляем результат до 10 знаков после запятой
+        return String.format("%.10f", result).replace(",", ".").removeTrailingZeros()
     }
 
+    // Удаляем лишние нули после запятой
+    private fun String.removeTrailingZeros(): String {
+        return if (this.contains(".")) {
+            this.replace("0*$".toRegex(), "").replace("\\.$".toRegex(), "")
+        } else {
+            this
+        }
+    }
 }

@@ -22,14 +22,14 @@
             android:layout_rowWeight="0"
             android:layout_columnSpan="4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:id="@+id/inputform"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="60dp"
             android:fontFamily="@font/neuropol"
             android:gravity="end"
             android:textColor="@color/purple_200"
-            android:textSize="30sp"
+            android:textSize="25sp"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="formula"/>
 
@@ -37,14 +37,14 @@
             android:layout_width="match_parent"
             android:layout_rowWeight="0"
             android:layout_columnSpan="4"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:id="@+id/calcresult"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/neuropol"
             android:gravity="end"
             android:textColor="@color/white"
-            android:textSize="50sp"
+            android:textSize="43sp"
             tools:text="result"/>
 
 
