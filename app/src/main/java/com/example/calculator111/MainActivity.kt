@@ -1,11 +1,15 @@
 package com.example.calculator111
 
+import android.graphics.RenderEffect
+import android.graphics.Shader
+import android.os.Build
 import android.os.Bundle
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -14,12 +18,15 @@ class MainActivity : AppCompatActivity() {
 
     //calcbutton
 
+    //@RequiresApi(Build.VERSION_CODES.S)
+    //val blurEffect = RenderEffect.createBlurEffect(10f, 10f, Shader.TileMode.MIRROR)
     private var firstnumber = ""
     private var currentnumber = ""
     private var currentoperator = ""
 
     private var result = ""
 
+    //@RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -44,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         for (i in 0 until parentLayout.childCount) {
             val view = parentLayout.getChildAt(i)
             if (view is Button) {
+                //view.setRenderEffect(blurEffect)
                 view.setOnClickListener {
                     val buttonText = view.text.toString()
                     when {
