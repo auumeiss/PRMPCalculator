@@ -22,7 +22,7 @@
             android:layout_rowWeight="0"
             android:layout_columnSpan="4"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_height="wrap_content"
             android:id="@+id/inputform"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="60dp"
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_rowWeight="0"
             android:layout_columnSpan="4"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:id="@+id/calcresult"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
@@ -49,8 +49,6 @@
 
 
         <Button
-            android:layout_width="0dp"
-            android:layout_height="0dp"
             android:id="@+id/clear_text"
             android:layout_rowWeight="1"
             android:layout_columnWeight="2"
@@ -63,8 +61,6 @@
             app:cornerRadius="15dp"/>
 
         <Button
-            android:layout_width="0dp"
-            android:layout_height="0dp"
             android:id="@+id/plus"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
@@ -77,8 +73,6 @@
             app:cornerRadius="15dp"/>
 
         <Button
-            android:layout_width="0dp"
-            android:layout_height="0dp"
             android:id="@+id/devide"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
@@ -91,9 +85,7 @@
             app:cornerRadius="15dp"/>
 
         <Button
-            android:layout_width="0dp"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_height="0dp"
             android:id="@+id/seven"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
@@ -106,9 +98,7 @@
             app:cornerRadius="15dp"/>
 
         <Button
-            android:layout_width="0dp"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_height="0dp"
             android:id="@+id/eight"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
@@ -121,8 +111,6 @@
             app:cornerRadius="15dp"/>
 
         <Button
-            android:layout_width="0dp"
-            android:layout_height="0dp"
             android:id="@+id/nine"
             style="?android:attr/borderlessButtonStyle"
             android:layout_rowWeight="1"
@@ -136,8 +124,6 @@
             app:cornerRadius="15dp"/>
 
         <Button
-            android:layout_width="0dp"
-            android:layout_height="0dp"
             android:id="@+id/multiply"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
@@ -150,8 +136,6 @@
             app:cornerRadius="15dp"/>
 
         <Button
-            android:layout_width="0dp"
-            android:layout_height="0dp"
             style="?android:attr/borderlessButtonStyle"
             android:id="@+id/four"
             android:layout_rowWeight="1"
@@ -164,8 +148,6 @@
             android:textSize="30sp"
             app:cornerRadius="15dp"/>
         <Button
-            android:layout_width="0dp"
-            android:layout_height="0dp"
             android:id="@+id/five"
             android:layout_rowWeight="1"
             style="?android:attr/borderlessButtonStyle"
@@ -178,8 +160,6 @@
             android:textSize="30sp"
             app:cornerRadius="15dp"/>
         <Button
-            android:layout_width="0dp"
-            android:layout_height="0dp"
             android:id="@+id/six"
             style="?android:attr/borderlessButtonStyle"
             android:layout_rowWeight="1"
@@ -193,8 +173,6 @@
             app:cornerRadius="15dp"/>
 
         <Button
-            android:layout_width="0dp"
-            android:layout_height="0dp"
             android:id="@+id/minus"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
@@ -206,9 +184,7 @@
             android:textSize="30sp"
             app:cornerRadius="15dp"/>
         <Button
-            android:layout_width="0dp"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_height="0dp"
             android:id="@+id/one"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
@@ -220,9 +196,7 @@
             android:textSize="30sp"
             app:cornerRadius="15dp"/>
         <Button
-            android:layout_width="0dp"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_height="0dp"
             android:id="@+id/two"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
@@ -234,8 +208,6 @@
             android:textSize="30sp"
             app:cornerRadius="15dp"/>
         <Button
-            android:layout_width="0dp"
-            android:layout_height="0dp"
             style="?android:attr/borderlessButtonStyle"
             android:id="@+id/three"
             android:layout_rowWeight="1"
@@ -249,8 +221,6 @@
             app:cornerRadius="15dp"/>
 
         <Button
-            android:layout_width="0dp"
-            android:layout_height="0dp"
             android:id="@+id/ravno"
             android:layout_rowWeight="2"
             android:layout_rowSpan="2"
@@ -264,9 +234,7 @@
             app:cornerRadius="15dp"/>
 
         <Button
-            android:layout_width="0dp"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_height="0dp"
             android:id="@+id/zero"
             android:layout_rowWeight="1"
             android:layout_columnWeight="2"
@@ -279,8 +247,6 @@
             app:cornerRadius="15dp"/>
 
         <Button
-            android:layout_width="0dp"
-            android:layout_height="0dp"
             android:id="@+id/dot"
             style="?android:attr/borderlessButtonStyle"
             android:layout_rowWeight="1"
