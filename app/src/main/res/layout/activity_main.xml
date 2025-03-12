@@ -5,144 +5,172 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/calc_background"
+    android:background="?attr/background"
     tools:context=".MainActivity">
 
     <GridLayout
         android:id="@+id/layoutmain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="40dp"
+        android:layout_marginHorizontal="0dp"
+        android:layout_marginVertical="0dp"
         android:columnCount="4"
-        android:rowCount="8"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="40dp">
+        android:rowCount="9">
 
+
+        <Button
+            android:backgroundTint="?attr/backgroundTint"
+            android:id="@+id/history"
+            android:layout_rowSpan="1"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_columnSpan="1"
+            android:text="🕔"
+            android:textColor="?attr/textFillColor"
+            />
+        <Button
+            android:backgroundTint="?attr/backgroundTint"
+        android:id="@+id/theme"
+            android:layout_rowSpan="1"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_columnSpan="1"
+            android:text="theme"
+            android:textColor="?attr/textFillColor"/>
         <TextView
             android:id="@+id/formula"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50sp"
             android:layout_rowWeight="1"
             android:layout_columnSpan="4"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="60dp"
             android:fontFamily="@font/neuropol"
             android:gravity="end"
-            android:textColor="@color/purple_200"
             android:textSize="25sp"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="formula" />
+            tools:text="formula"
+            android:textColor="?attr/textFillColor"/>
 
         <TextView
             android:id="@+id/result"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70sp"
             android:layout_rowWeight="1"
             android:layout_columnSpan="4"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/neuropol"
             android:gravity="end"
-            android:textColor="@color/white"
             android:textSize="43sp"
-            tools:text="result" />
+            tools:text="result"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
+            android:backgroundTint="?attr/backgroundTint"
             android:id="@+id/cos"
             android:layout_rowWeight="1"
             android:layout_columnSpan="1"
             android:layout_columnWeight="1"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/purple_200"
             android:fontFamily="@font/neuropol"
             android:text="cos("
             android:textSize="15sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
+            android:backgroundTint="?attr/backgroundTint"
             android:id="@+id/sin"
             android:layout_rowWeight="1"
             android:layout_columnSpan="1"
             android:layout_columnWeight="1"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/purple_200"
             android:fontFamily="@font/neuropol"
             android:text="sin("
             android:textSize="15sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
+            android:backgroundTint="?attr/backgroundTint"
             android:id="@+id/tg"
             android:layout_rowWeight="1"
             android:layout_columnSpan="1"
             android:layout_columnWeight="1"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/purple_200"
             android:fontFamily="@font/neuropol"
             android:text="tg("
             android:textSize="15sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
+            android:backgroundTint="?attr/backgroundTint"
             android:id="@+id/ctg"
             android:layout_rowWeight="1"
             android:layout_columnSpan="1"
             android:layout_columnWeight="1"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/purple_200"
             android:fontFamily="@font/neuropol"
             android:text="ctg("
             android:textSize="15sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
+            android:backgroundTint="?attr/backgroundTint"
             android:id="@+id/clear_text"
             android:layout_rowWeight="1"
             android:layout_columnSpan="1"
             android:layout_columnWeight="1"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/purple_200"
             android:fontFamily="@font/neuropol"
             android:text="C"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
+            android:backgroundTint="?attr/backgroundTint"
             android:id="@+id/sqrt"
             android:layout_rowWeight="1"
             android:layout_columnSpan="1"
             android:layout_columnWeight="1"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/purple_200"
             android:fontFamily="@font/neuropol"
             android:text="√"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
+            android:backgroundTint="?attr/backgroundTint"
             android:id="@+id/plus"
             android:layout_rowWeight="1"
             android:layout_columnSpan="1"
             android:layout_columnWeight="1"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/purple_200"
+             
             android:fontFamily="@font/neuropol"
             android:text="+"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
+            android:backgroundTint="?attr/backgroundTint"
             android:id="@+id/devide"
             android:layout_rowWeight="1"
             android:layout_columnSpan="1"
             android:layout_columnWeight="1"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/purple_200"
+             
             android:fontFamily="@font/neuropol"
             android:text="/"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
             android:id="@+id/seven"
@@ -155,7 +183,8 @@
             android:fontFamily="@font/neuropol"
             android:text="7"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
             android:id="@+id/eight"
@@ -168,7 +197,8 @@
             android:fontFamily="@font/neuropol"
             android:text="8"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
             android:id="@+id/nine"
@@ -181,19 +211,22 @@
             android:fontFamily="@font/neuropol"
             android:text="9"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
+            android:backgroundTint="?attr/backgroundTint"
             android:id="@+id/multiply"
             android:layout_rowWeight="1"
             android:layout_columnSpan="1"
             android:layout_columnWeight="1"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/purple_200"
+             
             android:fontFamily="@font/neuropol"
             android:text="*"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
             android:id="@+id/four"
@@ -206,7 +239,8 @@
             android:fontFamily="@font/neuropol"
             android:text="4"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
             android:id="@+id/five"
@@ -219,7 +253,8 @@
             android:fontFamily="@font/neuropol"
             android:text="5"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
             android:id="@+id/six"
@@ -232,19 +267,22 @@
             android:fontFamily="@font/neuropol"
             android:text="6"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
+            android:backgroundTint="?attr/backgroundTint"
             android:id="@+id/minus"
             android:layout_rowWeight="1"
             android:layout_columnSpan="1"
             android:layout_columnWeight="1"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/purple_200"
+             
             android:fontFamily="@font/neuropol"
             android:text="-"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
             android:id="@+id/one"
@@ -257,7 +295,8 @@
             android:fontFamily="@font/neuropol"
             android:text="1"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
             android:id="@+id/two"
@@ -270,7 +309,8 @@
             android:fontFamily="@font/neuropol"
             android:text="2"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
             android:id="@+id/three"
@@ -283,32 +323,37 @@
             android:fontFamily="@font/neuropol"
             android:text="3"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
+
             android:id="@+id/ravno"
             android:layout_rowSpan="1"
             android:layout_rowWeight="1"
             android:layout_columnSpan="1"
             android:layout_columnWeight="1"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/purple_500"
+            android:backgroundTint="?attr/backgroundTint"
             android:fontFamily="@font/neuropol"
             android:text="="
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
         <Button
+            android:backgroundTint="?attr/backgroundTint"
             android:id="@+id/otkr"
             android:layout_rowSpan="1"
             android:layout_rowWeight="1"
             android:layout_columnSpan="1"
             android:layout_columnWeight="1"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/purple_200"
+             
             android:fontFamily="@font/neuropol"
             android:text="("
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
 
         <Button
@@ -322,7 +367,8 @@
             android:fontFamily="@font/neuropol"
             android:text="0"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
         <Button
             android:id="@+id/dot"
@@ -335,19 +381,22 @@
             android:fontFamily="@font/neuropol"
             android:text="."
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
         <Button
+            android:backgroundTint="?attr/backgroundTint"
             android:id="@+id/zakr"
             android:layout_rowSpan="1"
             android:layout_rowWeight="1"
             android:layout_columnSpan="1"
             android:layout_columnWeight="1"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/purple_200"
+             
             android:fontFamily="@font/neuropol"
             android:text=")"
             android:textSize="30sp"
-            app:cornerRadius="15dp" />
+            app:cornerRadius="15dp"
+            android:textColor="?attr/textFillColor"/>
 
 
     </GridLayout>
