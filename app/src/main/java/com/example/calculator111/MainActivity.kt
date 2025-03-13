@@ -47,26 +47,14 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE)
-        val passKey = sharedPreferences.getString("pass_key", null)
-        val isAuth=sharedPreferences.getString("isAuth","false")
-        if (isAuth=="false") {
-            if (passKey == null) {
-                // Pass Key не установлен, перенаправляем на экран настройки
-                startActivity(Intent(this, SetupPassKeyActivity::class.java))
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val token = task.result
+                Log.d("FCM Token", token)
+                // Отправьте токен на ваш сервер для дальнейшего использования
             } else {
-                // Pass Key установлен, перенаправляем на экран входа
-                startActivity(Intent(this, LoginActivity::class.java))
-            }
-            finish() // Закрываем MainActivity, чтобы пользователь не мог вернуться назад
-            FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val token = task.result
-                    Log.d("FCM Token", token)
-                    // Отправьте токен на ваш сервер для дальнейшего использования
-                } else {
-                    Log.e("FCM Token", "Failed to get token", task.exception)
-                }
+                Log.e("FCM Token", "Failed to get token", task.exception)
             }
         }
         val db = Firebase.firestore

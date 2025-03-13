@@ -1,14 +1,19 @@
 package com.example.calculator111
 
+import Calculator.ThemeSaving
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
+import android.view.autofill.AutofillManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.credentials.CredentialManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -17,6 +22,8 @@ import androidx.credentials.GetCredentialRequest
 import androidx.credentials.GetPasswordOption
 import androidx.credentials.PasswordCredential
 import androidx.fragment.app.FragmentActivity
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,10 +38,50 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        val sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE)
+        val passKey = sharedPreferences.getString("pass_key", null)
+        val isAuth=sharedPreferences.getString("isAuth","false")
+        if (isAuth=="false") {
+            if (passKey == null) {
+                // Pass Key не установлен, перенаправляем на экран настройки
+                startActivity(Intent(this, SetupPassKeyActivity::class.java))
+                finish() // Закрываем MainActivity, чтобы пользователь не мог вернуться назад
+            }
+        }
+        val db = Firebase.firestore
+        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+        val themeSaving= ThemeSaving()
+        var newThemeState:Boolean = false
+        ThemeSaving().loadDeviceData(db, deviceId) { themeBoolean ->
+            // themeBoolean содержит значение темы
+            if (themeBoolean) {
+                // Применить темную тему
+                newThemeState=true
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                // Применить светлую тему
+                newThemeState=false
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
         autoLogin(this)
         etPassKey = findViewById(R.id.etPassKey)
         btnLogin = findViewById(R.id.btnLogin)
         btnResetPassKey = findViewById(R.id.btnResetPassKey)
+        val autofillManager = getSystemService(AutofillManager::class.java)
+
+        if (autofillManager != null) {
+            if (!autofillManager.isEnabled) {
+                val intent = Intent(Settings.ACTION_REQUEST_SET_AUTOFILL_SERVICE)
+                startActivity(intent)
+                Log.e("AutoFill", "❌ Автозаполнение ОТКЛЮЧЕНО, принудительно включаем...")
+                autofillManager.requestAutofill(etPassKey)
+            } else {
+                Log.d("AutoFill", "✅ Автозаполнение включено!")
+            }
+        } else {
+            Log.e("AutoFill", "❌ AutofillManager не найден в системе")
+        }
         val credentialManager = CredentialManager.create(this)
         btnLogin.setOnClickListener {
             val enteredKey = etPassKey.text.toString()
@@ -44,12 +91,16 @@ class LoginActivity : AppCompatActivity() {
                 showError("Неверный Pass Key")
             }
         }
-
+        Log.d("PassKey", "Поддержка Credential Manager: $credentialManager")
         btnResetPassKey.setOnClickListener {
-            setupBiometricAuthentication(this) // Используем биометрию для сброса
+            setupBiometricAuthentication(this,this) // Используем биометрию для сброса
         }
     }
 
+    private fun requestAutofill() {
+        val autofillManager = getSystemService(AutofillManager::class.java)
+        autofillManager?.requestAutofill(etPassKey)
+    }
 
     private fun autoLogin(context: Context) {
         val credentialManager = CredentialManager.create(context)
@@ -98,7 +149,7 @@ class LoginActivity : AppCompatActivity() {
     private fun showError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
-    private fun setupBiometricAuthentication(activity: FragmentActivity) {
+    private fun setupBiometricAuthentication(activity: FragmentActivity, context:Context) {
         val executor = ContextCompat.getMainExecutor(activity)
         val biometricPrompt = BiometricPrompt(activity, executor,
             object : BiometricPrompt.AuthenticationCallback() {
@@ -110,6 +161,8 @@ class LoginActivity : AppCompatActivity() {
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
                     resetPassKey() // Сбрасываем Pass Key
+                    finish()
+                    startActivity(Intent(context, SetupPassKeyActivity::class.java))
                 }
 
                 override fun onAuthenticationFailed() {
