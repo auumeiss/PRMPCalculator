@@ -43,9 +43,9 @@ class LoginActivity : AppCompatActivity() {
         val isAuth=sharedPreferences.getString("isAuth","false")
         if (isAuth=="false") {
             if (passKey == null) {
-                // Pass Key не установлен, перенаправляем на экран настройки
+
                 startActivity(Intent(this, SetupPassKeyActivity::class.java))
-                finish() // Закрываем MainActivity, чтобы пользователь не мог вернуться назад
+                finish()
             }
         }
         val db = Firebase.firestore
@@ -53,13 +53,13 @@ class LoginActivity : AppCompatActivity() {
         val themeSaving= ThemeSaving()
         var newThemeState:Boolean = false
         ThemeSaving().loadDeviceData(db, deviceId) { themeBoolean ->
-            // themeBoolean содержит значение темы
+
             if (themeBoolean) {
-                // Применить темную тему
+
                 newThemeState=true
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {
-                // Применить светлую тему
+
                 newThemeState=false
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
@@ -68,20 +68,7 @@ class LoginActivity : AppCompatActivity() {
         etPassKey = findViewById(R.id.etPassKey)
         btnLogin = findViewById(R.id.btnLogin)
         btnResetPassKey = findViewById(R.id.btnResetPassKey)
-        val autofillManager = getSystemService(AutofillManager::class.java)
-
-        if (autofillManager != null) {
-            if (!autofillManager.isEnabled) {
-                val intent = Intent(Settings.ACTION_REQUEST_SET_AUTOFILL_SERVICE)
-                startActivity(intent)
-                Log.e("AutoFill", "❌ Автозаполнение ОТКЛЮЧЕНО, принудительно включаем...")
-                autofillManager.requestAutofill(etPassKey)
-            } else {
-                Log.d("AutoFill", "✅ Автозаполнение включено!")
-            }
-        } else {
-            Log.e("AutoFill", "❌ AutofillManager не найден в системе")
-        }
+        requestAutofill()
         val credentialManager = CredentialManager.create(this)
         btnLogin.setOnClickListener {
             val enteredKey = etPassKey.text.toString()
@@ -106,7 +93,7 @@ class LoginActivity : AppCompatActivity() {
         val credentialManager = CredentialManager.create(context)
 
         val request = GetCredentialRequest(
-            listOf(GetPasswordOption()) // Запрос сохраненных паролей
+            listOf(GetPasswordOption())
         )
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -160,7 +147,7 @@ class LoginActivity : AppCompatActivity() {
 
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
-                    resetPassKey() // Сбрасываем Pass Key
+                    resetPassKey()
                     finish()
                     startActivity(Intent(context, SetupPassKeyActivity::class.java))
                 }

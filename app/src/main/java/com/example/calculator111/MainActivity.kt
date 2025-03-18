@@ -52,7 +52,6 @@ class MainActivity : AppCompatActivity() {
             if (task.isSuccessful) {
                 val token = task.result
                 Log.d("FCM Token", token)
-                // Отправьте токен на ваш сервер для дальнейшего использования
             } else {
                 Log.e("FCM Token", "Failed to get token", task.exception)
             }

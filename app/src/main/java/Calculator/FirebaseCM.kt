@@ -14,7 +14,6 @@ import com.google.firebase.messaging.RemoteMessage
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        // Обработка полученного сообщения
         val notification = remoteMessage.notification
         if (notification != null) {
             showNotification(notification.title, notification.body)

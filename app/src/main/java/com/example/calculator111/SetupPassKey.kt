@@ -74,25 +74,25 @@ class SetupPassKeyActivity : AppCompatActivity() {
         )
 
         val keyGenParameterSpec = KeyGenParameterSpec.Builder(
-            "pass_key_alias", // Уникальный алиас для ключа
+            "pass_key_alias",
             KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
         )
-            .setBlockModes(KeyProperties.BLOCK_MODE_GCM) // Режим шифрования
-            .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE) // Без дополнения
-            .setUserAuthenticationRequired(true) // Требуется аутентификация пользователя
-            .setUserAuthenticationValidityDurationSeconds(30) // Время действия аутентификации
+            .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
+            .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
+            .setUserAuthenticationRequired(true)
+            .setUserAuthenticationValidityDurationSeconds(30)
             .build()
 
         keyGenerator.init(keyGenParameterSpec)
-        keyGenerator.generateKey() // Генерация ключа
+        keyGenerator.generateKey()
     }
 
     private fun savePassKey(context: Context, key: String) {
         deletePassKey(context)
         val credentialManager = CredentialManager.create(context)
         val request = CreatePasswordRequest(
-            id = "calculator", // Логин пользователя (лучше использовать email)
-            password = key // Сам Passkey (пароль)
+            id = "calculator",
+            password = key
         )
         if (credentialManager == null) {
             Log.e("PassKey", "❌ Credential Manager НЕ поддерживается на этом устройстве!")
@@ -127,7 +127,6 @@ class SetupPassKeyActivity : AppCompatActivity() {
             }
         }
 
-        // Также сохраняем в SharedPreferences
         val sharedPreferences = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("pass_key", key)

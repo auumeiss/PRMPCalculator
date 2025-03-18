@@ -26,14 +26,14 @@ public class ThemeSaving {
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     val themeBoolean = document.get("themeIsNight") as? Boolean ?: false
-                    callback(themeBoolean) // Вызываем callback с результатом
+                    callback(themeBoolean)
                 } else {
-                    callback(false) // Если документ не существует, возвращаем false
+                    callback(false)
                 }
             }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error loading document", e)
-                callback(false) // В случае ошибки возвращаем false
+                callback(false)
             }
     }
 
